@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+#define MAX 100
+void input(char s[], char s2[])
+{
+    cin.getline(s, MAX);
+    cin.getline(s2, MAX);
+}
+
+void clearstring(char s[])
+{
+    int len = strlen(s);
+    int stat = 0;
+    while (s[stat] == ' ' && stat < len)
+    {
+        stat ++;
+    }
+
+    int endd = len-1;
+    while (s[endd] == ' ' && endd >= stat)
+        endd--;
+
+    int k;
+    char s1[MAX];
+    for (int i=stat; i<= endd; i++)
+    {
+        s1[k++] = s[i];
+    }
+    s1[k] = '\0';
+    strcpy(s, s1);
+}
+
+
+void output(char s[], char s2[])
+{
+    int len = strlen(s);
+    if ( len == 0 )
+    {
+        cout << "Chuoi rong.";
+        return ;
+    }
+    clearstring(s);
+    int k; cin >> k;
+    len = strlen(s);
+    if ( k < 0 || k > len )
+    {
+        cout << "Vi tri " << k << " khong thoa man.";
+        return ;
+    }
+    int len2 = strlen(s2);
+
+    for (int i=len; i>=k; i--)
+    {
+        s[i+len2+1] = s[i];
+    }
+
+    for (int i = 0; i<len2; i++)
+    {
+        s[i+k] = s2[i];
+    }
+    s[len2 + k ] = ' ';
+    cout << s;
+}
+
+int main()
+{
+    char s[MAX];
+    char s2[MAX];
+    input(s, s2);
+    output(s, s2);
+}
