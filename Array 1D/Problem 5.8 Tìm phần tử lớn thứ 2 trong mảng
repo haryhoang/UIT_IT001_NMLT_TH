@@ -1,0 +1,71 @@
+// Mô tả bài toán: Nhập một dãy số n, sau đó tìm phần tử lớn thứ 2 ( dãy âm dương đều được ), nếu không có thì xuất ra "No Find"
+Input
+5
+1 6 42 24 27
+Ouput
+27
+Input 4
+2 2 2 2
+Output 
+No Find
+
+// Logic code: Bài này có khá nhiều cách giải, cách đầu tiên là sắp xếp lại mảng rùi in ra phần tử thứ 2 từ cuối hoặc đầu tùy sắp xếp, cách này thì
+mình nghĩ ổn, có thẻ tạo mảng phụ để tránh phá hủy chuỗi, nhược điểm là không luyện tư duy, cách 2 khá là hay ho ( sẽ trình bày sau ) , 
+đó là ta dùng hai hàm for, hàm thứ 1 
+tìm max 1, hàm thứ 2 tìm max 2 ( sao cho khác max1 ) là được, cách này logic dễ hiểu, nhược điểm mình chưa nghĩ ra, còn cách 3 mình trình bày trong đây
+mình thấy khác phức tạp vì phải xử lí khá nhiều trường hợp cụ thể, logic của mình so sánh lần lượt a[i] và max1 với max2 ( trong code các bạn xem cụ thể sau ), 
+nhưng bù lại sẽ giúp các bạn học được kĩ năng liên quan đến tìm max khá hay ( kĩ thuật if ( max1 = 0.5 || a[i] > max1 ): kĩ thuật mình học trong 
+cuốn thực hành nmlt của cô Vân ) rất hiệu quả trong các bài toán tìm max, ngoài ra còn kĩ thuật xử lí ( max1 = max2 ) cũng khá hay trong 1 số tư duy,
+về phần test case mình sẽ đưa ra lời khuyên các test case ẩn có thể có: 1 là toàn số âm, hai là toàn các số giống nhau ( max2 No Find ),3 là n <=1 cũng
+No Find max2.
+
+// Code tham khảo
+#include <iostream>
+#include <string.h>
+using namespace std;
+#define MAX 100
+
+void input(int a[], int &n)
+{
+    cin >> n;
+    for (int i=0; i<n; i++)
+        cin >> a[i];
+}
+
+void output(int a[], int n)
+{
+    if ( n<=1 )
+    {
+        cout << "No Find";
+        return ;
+    }
+    float max1 = a[0];
+    float max2;
+    for(int i=0; i<n; i++)
+    {
+        if ( max1 == a[0] || a[i] > max1 ) // Kĩ thuật ép max1 và max2
+        {
+            max2 = max1;
+            max1 = a[i];
+        }
+        if ( a[i] >= max2 && a[i] < max1 ) // Tư duy tìm max2 out max1
+        {
+            max2 = a[i];
+        }
+    }
+    if ( max1 == max2 )
+    {
+        cout << "No Find";
+        return ;
+    }
+    cout << "Max 2 in array: " << max2;
+
+}
+
+int main()
+{
+    int n;
+    int a[MAX];
+    input(a, n);
+    output(a, n);
+}
