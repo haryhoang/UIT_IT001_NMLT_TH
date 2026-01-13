@@ -1,0 +1,72 @@
+// Mô tả bài toán: Nhập vào dãy có n phần tử, tìm phần tử dương có giá trị nhỏ nhất
+Test case:
+Input 5
+0 5 6 2 34
+Output 
+1
+Input 4
+1 2 3 4
+Output
+3
+Input 3 
+1 2 3
+Output 
+4
+// Logic code: Tạo một mảng đánh dấu các phần tử dương đã xuất hiện ( giống như cách con người tìm kiếm số ), xét trong khoảng
+các số dương từ số 1 đến số dương lớn nhất, nếu chưa xuất hiện thì in ra, nếu trong mảng đó không có thì tự động in ra kết quả maxx + 1
+lưu ý có thể test case ẩn rơi vào số n lớn, hoặc toàn các phần tử âm ( đã xử lí nhưng nên kiểm tra lại ), hoặc n = 0 thì nên in ra
+dòng gì đó..
+
+// Code tham khảo
+#include <iostream>
+#include <string.h>
+using namespace std;
+#define MAX 100
+
+void input(int a[], int &n)
+{
+    cin >> n;
+    for (int i=0; i<n; i++)
+        cin >> a[i];
+}
+
+void output(int a[], int n)
+{
+    int Index[MAX] = {0};
+    float maxx = 0.5;
+    int cnt = 0;
+
+    for (int i =0; i<n; i++)
+    {
+        if ( a[i] > 0 )
+        {
+            Index[ a[i] ] = 1;
+        }
+        if ( maxx == 0.5 || a[i] > maxx )
+            maxx = a[i];
+    }
+    
+    if (maxx < 0)
+        maxx = 1.5; // Xử lí đối với mảng toàn số âm (reset maxx = 1.5 để in ra 1 )
+        
+    for (int i=1; i<maxx; i++)
+    {
+        if (Index[i] == 0)
+        {
+            cout << i;
+            return;
+            cnt++;
+        }
+    }
+    if (cnt == 0)
+        cout << maxx + 1;
+    return ;
+}
+
+int main()
+{
+    int n;
+    int a[MAX];
+    input(a, n);
+    output(a, n);
+}
