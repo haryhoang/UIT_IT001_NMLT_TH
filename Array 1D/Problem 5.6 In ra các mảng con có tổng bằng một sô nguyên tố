@@ -1,0 +1,69 @@
+// Mô tả bài toan: Cho một mảng 1 chiều gồm có n phần tử, lần lượt in ra các mảng con liên tiếp có tổng là một số nguyên tố
+Test case:
+Input
+5
+1 3 6 2 7
+Ouput
+1 3 6 2 7
+3 6 2
+Giải thích test case: 1+3+6+2+7 = 19 (snt) in ra mảng 1 3 6 2 7
+3+6+2 = 11 (snt) in ra mảng 3 6 2
+// Logic code: Sử dụng vòng lặp nhỏ thứ 2 (biến j) để lặp qua từng i, kiểm tra bằng cách cộng dồn phần tử, sau khi cộng dồn sử dụng một hàm snt để kiểm tra có phải là số nguyên tố hay không, nếu phải
+gọi hàm print_array, tăng biến cnt++ (check xem có mảng nào khong, nếu không thì in kết thúc), sau khi duyệt xong thoát khỏi vòng lặp phụ j, trở lại vòng lặp i, nhớ reset sum = 0 cho vòng lặp
+i mới.
+// Code tham khảo:
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+#define MAX 100
+
+void input(int a[], int &n)
+{
+    cin >> n;
+    for (int i=0; i<n; i++)
+        cin >> a[i];
+}
+int snt(int n)
+{
+    if (n <= 1)
+        return 0;
+    for (int i=2; i*i<=n; i++)
+        if ( n%i == 0)
+        return 0;
+    return 1;
+}
+void print_array(int a[], int s, int e)
+{
+    for (int i=s; i<=e; i++)
+        cout << a[i] << " ";
+}
+void output(int a[], int n)
+{
+    int sum = 0, cnt = 0;
+    for (int i=0; i<n; i++)
+    {
+        for (int j=i;j<n; j++)
+        {
+            sum+= a[j];
+            if ( snt(sum) == 1 && j - i + 1 >= 2 )
+            {
+                print_array(a, i, j);
+                cout << endl;
+                cnt++;
+            }
+        }
+        sum = 0;
+    }
+    if (cnt == 0)
+        cout << "No array";
+    return ;
+}
+
+int main()
+{
+    int n;
+    int a[MAX];
+    input(a, n);
+    output(a, n);
+}
