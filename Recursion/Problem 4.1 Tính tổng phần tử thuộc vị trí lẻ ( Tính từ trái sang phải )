@@ -1,0 +1,59 @@
+// Mô tả bài toán Viết chương trình tính tổng giá trị các chữ số ở vị trí lẻ của một số nguyên N
+Chẳng hạn như N=12347 thì các chữ số ở vị trí lẻ là 1,3,7 (Xem vị trí đầu tiên của N là vị trí lẻ)
+Hãy sử dụng kỹ thuật ĐỆ QUY để giải quyết bài toán (không sử dụng vòng lặp)
+Test case
+Input 1050
+Output 6
+
+Input 46
+Output 4
+// Logic code: Lần đầu tiên mình làm mình nghĩ khá dễ, lúc đó logic của mình là đảo lại số
+để có thể đọc vị trí từ phải sang trái, nhưng khi nhìn lại test case 10 đảo thành 1 thì mình ...
+nên mình đã nghĩ ra thuật toán khác, hiện tại mình sử dụng thuật toán này thấy giải quyết
+khá ổn, ban đầu mình đo xem chiều dài của số là bao nhiêu = 1 hàm len (vd 154 thì len =3 )
+sau đó mình sẽ phân loại nếu lã chẵn gọi hàm fun2, lẻ gọi hàm fun1, mục đích để có thể cộng 
+dồng bằng đệ quy đuôi ( mình thấy dễ hiểu nhất ), logic cộng dồn của mình sử dụng một biến nhỏ
+i, với len là số lẻ thì mình truyền cho i = 0 ( hoặc bằng 1 tùy các bạn qui ước ), qui luật chung
+là với len là số lẻ thì số cuối cùng cộng dồn được, vậy thì mình sử dụng biểu thức a?b:c để
+có thể cộng dồn, sau đó tăng i lên 1, nếu thỏa, cộng dồn chữ số đó, nếu không cộng với 0.
+vd: 123, len =3 lẻ, truyền i =1, giả sử mình có s + (i % 2? n % 10 : 0) thì nghĩa là với i lẻ
+thì mình sẽ cộng dồn, như vậy i = 1 mình có s =1, i = 2 ko cộng và i =3 cộng suy ra s = 1 + 3 =4
+với logic này mình sẽ tránh trường hợp có số 0 đặc biệt ở cuối, khá hiệu quả đấy.
+
+// Code tham khảo
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+void input(long long &n)
+{
+    cin >> n;
+}
+int len(long long n)
+{
+    if (n==0) return 0;
+    return 1 + len(n/10);
+}
+int fun1(long long n, int i, int s)
+{
+    if (n == 0) return s;
+    return fun1(n/10, i+1, s+ ((i%2)?0:(n%10)) ); // i chẵn thì in ( hơi ngược lúc mình nói logic )
+}
+int fun2(long long n, int i, int s)
+{
+    if (n == 0) return s;
+    return fun2(n/10, i+1, s+ ((i%2)?0:(n%10)) ); 
+}
+
+int main()
+{
+    long long n;
+    input(n);
+    int l =  len(n);
+    if (l % 2 == 1) // len lẻ thì gọi fun1, truyền i = 0 làm mốc
+        cout << fun1(n, 0, 0);
+    else
+        cout << fun2(n, 1, 0);
+
+}
