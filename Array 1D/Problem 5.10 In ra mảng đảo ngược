@@ -1,0 +1,41 @@
+// Mô tả bài toán: In ra mảng đảo ngược của mảng a
+Input 5
+8 43 2 5 3
+Ouput 
+3 5 2 43 8
+
+// Logic code: Khá đơn giản, chỉ cần đổi chỗ a[i] với a[n-i-1] nghĩa là a[0] với a[n-1]
+chỉ cần nhớ chú ý giới hạn biến i chạy khi hoán đổi vị trí
+// Code tham khảo
+#include <iostream>
+#include <math.h>
+#define Max 1000
+using namespace std;
+
+void Input(int a[], int &n)
+{
+    cin >> n;
+    for (int i=0; i<n; i++)
+        cin >> a[i];
+}
+
+void Fun(int a[], int n)
+{
+    for (int i=0; i<n/2; i++)
+    {
+        int key = a[i];
+        a[i] = a[n-i-1];
+        a[n-i-1] = key;
+    }
+    for (int i=0; i<n; i++)
+        cout << a[i] << " ";
+}
+
+int main()
+{
+    int a[Max];
+    int n;
+    Input(a,n);
+    Fun(a,n);
+    return 0;
+}
