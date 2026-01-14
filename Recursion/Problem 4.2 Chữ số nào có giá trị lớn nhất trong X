@@ -9,6 +9,7 @@ Output 12345 - 5
 chữ số càn tìm, ở cách 1 mình dùng toán tử ?, logic khá dễ nên các bạn tự đọc nha, còn cách 2 thì
 mình sử dụng kĩ thuật tìm maxx ( if ( maxx = -9 || n%10 > maxx ) ... ) khá hiệu quả, các bạn chỉ
 cần chú ý vị trí của s gắn trước hay sau điều kiện kết thúc n là được ( kết thúc đệ quy )
+*Note: test case ẩn dạng bài này là cho n vượt qua int nên sd kiểu long long nha
 
 // Code tham khảo
 #include <iostream>
