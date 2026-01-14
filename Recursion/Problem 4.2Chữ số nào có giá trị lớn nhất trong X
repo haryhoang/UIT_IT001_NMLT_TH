@@ -1,0 +1,57 @@
+// Mô tả bài toán: Hãy viết chương trình để xác định chữ số nào có giá trị lớn nhất trong X. 
+Chẳng hạn như X = 2532 thì X có chữ số 5 có giá trị lớn nhất trong X. 
+Hãy sử dụng kỹ thuật ĐỆ QUY để giải quyết bài toán (không sử dụng vòng lặp.
+
+Input 12345
+Output 12345 - 5
+
+// Logic code: Bài này mình nghĩ ra hai cách để giải chủ yếu khác nhau ở phần gán s ( maxx ) cho
+chữ số càn tìm, ở cách 1 mình dùng toán tử ?, logic khá dễ nên các bạn tự đọc nha, còn cách 2 thì
+mình sử dụng kĩ thuật tìm maxx ( if ( maxx = -9 || n%10 > maxx ) ... ) khá hiệu quả, các bạn chỉ
+cần chú ý vị trí của s gắn trước hay sau điều kiện kết thúc n là được ( kết thúc đệ quy )
+
+// Code tham khảo
+#include <iostream>
+using namespace std;
+void input(long long &n)
+{
+    cin >> n;
+}
+
+int fun(long long n, int s)
+{
+    if ( n== 0 )
+    return s;
+    return fun(n/10, s = n%10>s?n%10:s );
+}
+int main()
+{
+    long long n;
+    input(n);
+    cout << n << " - ";
+    cout << fun(n, 0);
+}
+
+Cách 2: ( Đã AC thành công )
+
+#include <iostream>
+using namespace std;
+
+int fun(long long n, long long s)
+{
+    if (n == 0) return s;
+    if (s == -99 || n%10 > s)
+        s = n%10;
+    return fun(n/10, s);
+}
+
+
+int main()
+{
+    long long n;
+    cin >> n;
+
+    cout << n << " - " <<fun(n, -99);
+
+    return 0;
+}
