@@ -1,0 +1,65 @@
+// Mô tả bài toán: Viết chương trình tính giá trị chủ đạo của một số nguyên N.
+Cách tính giá trị chủ đạo của N là tính tổng giá trị các chữ số N cho đến khi tổng < 10 thì dừng.
+Hãy sử dụng kỹ thuật ĐỆ QUY để giải quyết bài toán (không sử dụng vòng lặp)
+Test case: 
+Input 123
+Output 6
+
+Input 491195
+Output 2
+// Logic code: Nghĩ đơn giản thì ta phải hiểu qui tắc cộng dồn, nếu dùng đệ quy thì sau khi 
+kết thsuc n thì ta kiểm tra sum, nếu sum vẫn lớn hơn = 10 thì ta tiếp tục gọi lại hàm đối với 
+s ( đóng vai trò là n mới ), bài này mình cũng có hai cách giải, các đầu tiên mình làm khá rắc
+rối, mình nghĩ sau một thời gian quen thuộc thì tư duy của mình đã nâng cao và có thể nghĩ
+ra thuật toán hiệu quả hơn
+*Note: Bài này test case ẩn chỉ là n lớn - > dùng long long 
+// Code tham khảo
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int fun(long long n, long long s)
+{
+    if ( n == 0)
+    {
+        if ( s >=  10)
+            return fun(s, 0); // Logic code này mình nghĩ đơn giản và khá dễ hiểu 
+        return s;
+    }
+    return fun(n/10, s+n%10);
+}
+
+int main()
+{
+    long long n;
+    cin >> n;
+    cout << fun(n, 0);
+}
+
+Cách 2: ( Đã AC thành công )
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+void fun(long long n, int s)
+{
+    if (s >= 10 && n== 0)
+    {
+        n = s;
+        s = 0;
+    }
+    if ((s<10) && n==0)
+    {
+        cout << s; return ;
+    }
+    return fun(n/10, s+ n%10);
+}
+
+
+int main()
+{
+    long long n;
+    cin >> n;
+    fun(n, 0);
+    return 0;
+}
