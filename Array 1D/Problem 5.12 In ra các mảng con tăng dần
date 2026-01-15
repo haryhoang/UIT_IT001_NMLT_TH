@@ -1,0 +1,87 @@
+// Mô tả bài toán Nhập mảng A một chiều gồm N phần tử số nguyên int. Hãy xuất ra các mảng con tăng 
+của mảng A. Nếu mảng A không có mảng con tăng thì xuất "No Find"
+Mảng con tăng là mảng có từ 2 phần tử trở lên với thứ tự tăng dần. 
+Chẳng hạn như mảng B là {15, 28, 89, 43, 21, 67} thì mảng con tăng của mảng B là
+{15, 28, 89} và {21, 67}
+Input 5 
+5 4 3 2 1
+Ouput No Find
+
+Input 6
+4 5 2 8 9 1
+Output 4 5 
+2 8 9
+
+// Logic code, chỉ cần nhìn ra được điểm ngắt chuỗi kết hợp với kiểm tra cuốic chuỗi có thõa mản
+hay không, lưu ý có hai cách chính xử lí vòng lặp dạng 1D, 1 là với mỗi i lần lượt lặp 1 j, hai là 
+lặp qua các cặp phần tử như này
+// Code tham khảo
+
+#include <iostream>
+#include <math.h>
+#define Max 1000
+using namespace std;
+
+void Input(int a[], int &n)
+{
+    cin >> n;
+    for (int i=0; i<n; i++)
+        cin >> a[i];
+}
+void print_array(int a[], int s, int e)
+{
+    for (int i=s; i<=e; i++)
+        cout << a[i] << " ";
+    cout << endl;
+}
+void Fun(int a[], int n)
+{
+    int cnt = 0;
+    int s=0;
+
+
+    for (int i=0; i<n-1; i++) //Kiem tra toi n-1 thui vi ta có a[i+1] nếu là n thường sẽ nhặt "Rash"
+    {
+        if ( a[i] >= a[i+1] ) // Điểm giao cắt
+        {
+            int len = i-s+1;
+            if ( len >= 2)
+                {
+                    print_array(a, s, i);
+                    cnt++;
+                }
+            s= i+1;
+        }
+    }
+    if ( s != 0 ) // Kiểm tra cuối chuỗi 
+    {
+
+    for (int i=s; i<n-1; i++)
+    {
+        if (a[i+1] <= a[i]) // Logic kiểm tra xem cuối chuỗi có phần tử nào ko thỏa ko.
+            break;
+        int len = n-s;
+        if (len >=2 )
+            {
+                print_array(a, s, n-1);
+                cnt++;
+                break;
+            }
+    }
+    }
+
+    if (cnt == 0)
+        cout << "No Find";
+    return ;
+}
+
+
+
+int main()
+{
+    int a[Max];
+    int n;
+    Input(a,n);
+    Fun(a,n);
+    return 0;
+}
