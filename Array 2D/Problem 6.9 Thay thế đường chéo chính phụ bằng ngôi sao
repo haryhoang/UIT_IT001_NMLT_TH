@@ -1,0 +1,66 @@
+// Mô tả bài toán Nhập mảng 2 chiều gồm N dòng x N cột và các phần tử trong mảng là 
+số nguyên int. Hãy xuất ra mảng với sự thay đổi các phần tử tại vị trí 2 đường chéo là ký tự "*"
+Ví dụ: mảng A = {{1 , 2 , 3}
+
+              , {4 , 5 , 6}
+
+              , {7 , 8 , 9}}
+
+ Xuất * tại vị trí 2 đường chéo
+
+              * 2 *
+
+              4 * 6
+
+              * 8 *
+// Test case
+Input -1
+Output No Find
+// Logic code: bài toán này mình nghĩ không khó, đơn giản chỉ cần nhớ qui tắc tìm pần tử trên 
+đường chéo chính phụ là được, dcc i==j, dcp i+j == n-1.
+// Code tham khảo 
+
+#include <iostream>
+#include <math.h>
+#define Max 100
+using namespace std;
+
+void Input(int a[][Max], int &n)
+{
+    cin >> n;
+    for (int i=0; i<n; i++)
+        for (int j=0; j<n; j++)
+        cin >> a[i][j];
+}
+
+void Fun(int a[][Max], int n)
+{
+    if ( n<= 0)
+    {
+        cout << "No Find";
+        return ;
+    }
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<n; j++)
+        {
+            if ( i==j || i+j == n-1 )
+            {
+                cout << "*" << " ";
+                continue;
+            }
+            cout << a[i][j] << " ";
+        }
+        cout << endl;
+    }
+    return ;
+}
+
+int main()
+{
+    int a[Max][Max];
+    int n,m;
+    Input(a,n);
+    Fun(a,n);
+    return 0;
+}
