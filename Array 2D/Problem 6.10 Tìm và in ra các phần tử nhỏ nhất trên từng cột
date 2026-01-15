@@ -1,0 +1,69 @@
+// Mô tả bài toán: Nhập mảng 2 chiều gồm N dòng x M cột và các phần tử trong mảng 
+là số nguyên int. Tìm giá trị nhỏ nhất trên từng cột của mảng 2 chiều.
+Ví dụ: mảng A = {{1 , 2 , 3}
+
+               , {4 , 5 , 6}
+
+               , {7 , 8 , 9}}
+
+Ouput:
+col 0 : 1
+col 1 : 2
+col 2 : 3
+Tets case: 
+Input 0 5
+Output No Find
+
+// Logic code: Mục đích mình làm bài toán này để các bạn biết cách điều khiển các phần tử trên
+cột thay vì trên hàng như thông thường, các bạn sẽ cho vòng lặp của cột ( thường là j ) 
+chạy trước sau đó cho vòng lặp chạy của hàng ( thường là i ) sau. Mình tìm maxx với kĩ thuật 
+if or nha.
+
+// Code tham khảo
+
+#include <iostream>
+#include <math.h>
+#define Max 100
+using namespace std;
+
+void Input (int a[][Max], int &n, int &m)
+{
+    cin >> n >> m;
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m; j++)
+            cin >> a[i][j];
+    }
+}
+
+void Fun(int a[][Max], int n, int m)
+{
+    if ( n<= 0 || m <= 0)
+    {
+        cout << "No Find";
+        return ;
+    }
+    float maxx = 0.5;
+    for (int j=0; j<m; j++) // Cho biến điều khiển cột chạy trước nah
+    {
+        for (int i=0; i<n; i++) // Biến điều khiển hàng chạy sau
+        {
+            if (maxx == 0.5 || a[i][j] < maxx ) // Kĩ thuật tìm maxx khá hay nha
+            {
+                maxx = a[i][j];
+            }
+        }
+        cout << "col " << j << " : " << maxx << endl;
+            maxx = 0.5; // Nhớ reset lại 
+    }
+    return ;
+}
+
+int main()
+{
+    int a[Max][Max];
+    int n,m;
+    Input(a,n,m);
+    Fun(a,n,m);
+    return 0;
+}
