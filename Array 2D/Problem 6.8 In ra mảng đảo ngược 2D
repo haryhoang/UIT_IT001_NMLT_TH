@@ -1,0 +1,81 @@
+// Mô tả bài toán: Nhập mảng 2 chiều gồm N dòng x M cột và các phần tử trong mảng là 
+số nguyên int. In ra mảng sau khi tiến hành ĐẢO các cột trong mảng.
+Ví dụ: mảng A = {{1 , 2 , 3}
+
+              , {4 , 5 , 6}
+
+              , {7 , 8 , 9}}
+              
+ Mảng A sau khi đảo cột 
+mảng A = {{3 , 2 , 1}
+
+        , {6 , 5 , 4}
+
+        , {9 , 8 , 7}}
+Test case
+Input 5 0
+Ouput No Find
+
+Input 2 
+2 7 
+0 4
+Ouput 
+7 2
+4 0
+// Logic code khá đơn giản, các bạn cú tưởng như chỉ cần đảo thứ tự của các phần tử trong 1 hàng
+giống với logic khi các bạn cho đảo mnagr 1 chiều, sử dụng biến phụ key để lưu trữ kết quả 
+trao đổi và nhớ cho cột chạy tới m/2 thui
+// Code tham khảo: 
+
+#include <iostream>
+#include <math.h>
+#define Max 100
+using namespace std;
+
+void Input(int a[][Max], int &n, int &m )
+{
+    cin >> n >> m;
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m; j++)
+            cin >> a[i][j];
+    }
+}
+
+void Fun(int a[][Max], int n, int m)
+{
+    if ( n<=0 || m <= 0)
+    {
+        cout << "No Find";
+        return ;
+    }
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m/2; j++)
+        {
+            int key = a[i][j];
+            a[i][j] = a[i][m-j-1];
+            a[i][m-j-1] = key;
+        }
+    }
+}
+
+
+void Output(int a[Max][Max], int n, int m)
+{
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++)
+            cout<<a[i][j]<<" ";
+        cout<<endl;
+    }
+}
+
+int main()
+{
+    int a[Max][Max];
+    int n,m;
+    Input(a,n,m);
+    Fun(a,n,m);
+    Output(a,n,m);
+    return 0;
+}
