@@ -1,0 +1,79 @@
+// Mô tả bài toán: Viết chương trình kiểm tra tính mạnh yếu của người dùng nhập vào
+dưới dạng chuỗi như sau: Một mật khẩu mạnh được định nghĩa thỏa cả 4 tiêu chí sau:
+1: Chứa các kí tự đặc biệt : {!, @, #, $, %, ^, &, *, <, >, ?}
+2: Có chứa chữ cái in hoa {A, B, C, .... , Z }
+3: Có chứa chữ số { 1, 2, 3, ... 9, 0 Ư
+4: Có độ dài tối thiểu là 6
+Test case
+Input HTL@270411
+Output Strong
+
+Input KL220106p
+Ouput Weak
+// Logic code: Bài này mình sẽ giúp các bạn biết các check kí tự trong mảng, quá đó có thể biết 
+so sánh các kí tự trong một chuỗi với các kí tự khác, như là chữ số, chữ cái, kí tự đặc biệt,..
+
+// Code tham khảo 
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+#define MAX 1000
+
+int Spe_char( char K ) // So sánh các kí tự đặc biệt
+{
+    if (K == '!' || K == '@' ||
+            K == '#' || K == '$' ||
+            K == '%' || K == '^' ||
+            K == '&' || K == '*' ||
+            K == '<' || K == '>' ||
+            K == '?'  )
+                return 1;
+    return 0;
+}
+int Up_char( char k ) // So sánh với chữ cái in hoa
+{
+    if ( k >= 'A' && k < 'Z')
+        return 1;
+    return 0;
+}
+int Num_char( char k )
+{
+    if ( k >= '0' && k <= '9')
+        return 1;
+    return 0;
+}
+
+
+void fun(char S[])
+{
+    cin.getline(S, MAX); // Sử dụng hàm getline nhập chuỗi rất an toàn nhé.
+    int spe_char = 0, up_char = 0, num_char = 0, len = 0;
+
+    int length = strlen(S);
+    if ( length >= 6 )
+        len++;
+
+    for (int i=0; i<length; i++) // Mình sử dụng 1 vòng lặp duy nhất để lặp qua từng kí tự
+    {
+        if ( Spe_char(S[i]) == 1 ) // Nếu thỏa bát cứ điều kiện nào thì tăng giá trị
+            spe_char++;
+        if ( Up_char(S[i]) == 1 )
+            up_char++;
+        if ( Num_char(S[i]) == 1)
+            num_char++;
+    }
+    if ( spe_char !=0 && up_char != 0 && num_char != 0 && len != 0) // Nếu thỏa thì mới được in
+    {
+        cout <<  "Strong";
+        return ;
+    }
+    cout << "Weak";
+    return ;
+}
+
+int main() {
+    char S[MAX];
+    fun(S);
+    return 0;
+}
