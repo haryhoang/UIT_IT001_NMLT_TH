@@ -1,0 +1,92 @@
+// Mô tả bài toán: Nhập mảng 1 chiều gồm N phần tử số nguyên int. Giả sử mảng nhập vào đã có 
+thứ tự tăng dần Nhập một giá trị số nguyên K. Hãy chèn K vào mảng sao cho mảng vẫn có thứ tự
+tăng dần (Không sắp xếp lại mảng).
+Test case
+Input 5
+1 3 5 6 7
+3
+Output 3 khong hop le.
+
+Input 4
+02 04 11 27
+502
+02 04 11 27 502
+
+// Logic code: Mình sẽ kiểm tra tính nguy hiểm của test case bằng cách chia ra 3 th cụ thể, thứ 1
+xử lí giá trị k trùng phần tử trong mảng, thứ 2 xem k lớn nhất hay bé nhất, sau đó mới chèn k vào
+giữa hai vị trí, logic chèn cũng khá đơn giản, mình sẽ kéo dài mảng, sau đó thì dịch chuyển
+và ghi đè thui.
+// Code tham khảo
+
+#include <iostream>
+#include <math.h>
+#define Max 1000
+using namespace std;
+void Input(int a[], int &n)
+{
+    cin >> n;
+    for (int i=0; i<n; i++)
+        cin >> a[i];
+}
+
+void Fun(int a[], int &n)
+{
+    int k =0;
+    cin >> k;
+
+    for (int i=0; i<n; i++)
+    {
+        if (a[i] == k)
+        {
+            cout << k << " khong hop le." << endl;
+            return ;
+        }
+    }
+    for (int i=0; i<n; i++)
+    {
+        if ( a[i] < k && a[i+1] > k )
+        {
+            n++;
+            for (int j=n-1; j>i; j--)
+            {
+                a[j] = a[j-1];
+            }
+            a[i+1] = k;
+            return ;
+        }
+        if ( k < a[0])
+        {
+           n++;
+            for (int j=n-1; j>0; j--)
+            {
+                a[j] = a[j-1];
+            }
+            a[0] = k;
+            return ;
+        }
+
+        if ( k > a[n-1])
+        {
+            n++;
+            a[n-1] = k;
+            return ;
+        }
+    }
+}
+
+void Output(int a[], int n)
+{
+    for(int i=0;i<n;i++)
+        cout<<a[i]<<" ";
+}
+
+int main()
+{
+    int a[Max];
+    int n;
+    Input(a,n);
+    Fun(a,n);
+    Output(a,n);
+    return 0;
+}
+
