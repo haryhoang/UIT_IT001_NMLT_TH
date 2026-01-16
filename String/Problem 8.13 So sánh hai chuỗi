@@ -1,0 +1,62 @@
+// Mô tả bài toán: Nhập 2 chuỗi ký tự s1 và s2 có chiều dài tối đa 254 ký tự.
+So sánh 2 chuỗi s1 và s2.
+INPUT                                              
+-       2 chuỗi s1 và s2
+OUTPUT
+-       -1: nếu s1 < s2
+
+-       0: nếu s1 và s2 giống nhau
+
+-       1: nếu s1 > s2
+
+Test case
+Input Abc Abc
+Output 0
+
+Input Abcd Abc
+Output 1
+
+Input Abc Abd
+Ouput -1
+// Logic code: Bài toán này mình sẽ sử dụng logic so sánh độ dài của chuỗi trước, bằng cách
+ xem xét độ dài của chuỗi s1 và s2 , nếu ko hơn hoặc ko kém thì mình sẽ đến logic của vòng lặp if
+trong vòng lặp if, mình sẽ kiểm tra từng chữ cái và so sánh độ dài của chúng, ép kiểu về in hoặc
+để dưới dạng 'A' kí tự chắc cũng so sánh được nhưng mình ưu tiên đưa về kiểu int nha, cuối cùng 
+nếu tất cả trường hợp không thõa mãn thì chúng ta mới in ra số 0.
+// Code tham khảo
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+#define MAX 100
+void input(char s[], char ss[])
+{
+    cin.getline(s, MAX);
+    cin.getline(ss, MAX);
+}
+
+int output(char s[], char ss[])
+{
+    int len1 =strlen(s);
+    int len2 = strlen(ss);
+    if (len1>len2) // so sánh độ dài trước nhé
+        return 1;
+    if (len1<len2)
+        return -1;
+    for(int i=0; i<len1; i++)
+    {
+        if ( (int)s[i] > (int)ss[i] ) // so sánh bằng cách ép kiểu theo asscii
+            return 1;
+        if ( (int)s[i] < (int)ss[i] )
+            return -1;
+    }
+    return 0;
+}
+
+int main()
+{
+    char s[MAX];
+    char ss[MAX];
+    input(s, ss);
+    cout << output(s, ss);
+}
