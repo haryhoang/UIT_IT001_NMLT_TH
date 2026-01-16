@@ -1,0 +1,48 @@
+// MÔ tả bài toán: Nhập vào một chuỗi S. Hãy tìm từ dài nhất trong chuỗi S. 
+Nếu có nhiều từ có cùng chiều dài nhất thì chọn từ đầu tiên.
+Từ được hiểu trong bài tập này là dãy ký tự không có khoảng trắng và chuỗi nhập vào
+đã được chuẩn hóa không có khoảng trắng thừa.
+// Test case:
+Input Hoang Gia Hung
+Ouput Hoang
+
+Input Love you much
+Ouput Love
+// Logic code: Thông thường đối với các bài toán về chuỗi thì mình sẽ chuẩn hóa chuỗi trước, 
+nghĩa là sẽ xóa bỏ đi các ckhoảng trống ở đầu và cuói chuỗi, ở bài toán nói rõ là sẽ hông có
+trường hợp đó nên mình mới không chuẩn hóa nhé, tets case bài này khá dơn giản, mình sẽ nói
+về logic code, chúng ta cần phải tạo một biến point và dùng hàm strtok tách các từ ra khỏi chuỗi
+"Ngăn cách bởi dấu cách" sau đó chúng ta tính len, sử dụng kĩ thuật tìm maxx , lưu trữ kết quả từ 
+dài nhất vào một vị trí vào mảng, cuối cùng thì in thui.
+// Code tham khảo 
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+#define MAX 1000
+
+void fun(char S[])
+{
+    cin.getline(S, MAX);
+    char *point = strtok(S, " "); // Cần biến point để tách chuỗi
+    char *Sto[MAX];
+    float maxx = 0.5;
+
+    while( point != nullptr )
+    {
+        int len = strlen(point);
+        if ( maxx == 0.5 || len > maxx ) // Kĩ thuật tìm lenn max
+        {
+            maxx = len;
+            Sto[0] = point;
+        }
+            point = strtok( nullptr, " "); // Lặp lại vòng lặp đến cuối chuỗi
+    }
+        cout << Sto[0];
+}
+
+int main() {
+    char S[MAX];
+    fun(S);
+    return 0;
+}
