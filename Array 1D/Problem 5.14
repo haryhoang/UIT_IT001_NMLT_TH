@@ -1,0 +1,81 @@
+// Mô tả bài toán: Tạo mảng một chiều a bao gồm n số nguyên tố theo thứ tự tăng dần.
+Nhập vào chữ số y (0 ≤ y ≤ 9). Tìm xem trong mảng a có bao nhiêu phần tử chứa số y.
+Test case
+Input 1 7
+Ouput 3
+Giải thích: Snt 13 11 và 17
+
+// Logic code: Đầu tiên tạo 1 mảng snt ban đầu bằng cách kiểm tra từ i, nếu i là snt
+thì add vào trong mảng, mình có thể dùng while nha, mình mới nghĩ ra nếu dùng while thì 
+có thể làm thế này, các bạn checck thử nha, với i =2;
+while ( j < n )
+{ if ( snt(i) == 1)
+    a[j++] = i;
+    i++;
+}
+kiểu kiểu vậy, sau đó mình sẽ dùng một hàm phân tách các chữ số trong a[i], nếu có trùng == với
+y thì mìn sẽ return 1 cộgn vào biến cnt, cuối cùng thì in ra biến cnt là được.
+// Code tham khảo
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+#define MAX 100
+
+void NhapmangSNT(int a[], int &n);
+int SoPhanTuChuaY(int a[], int n,int y);
+
+int snt(int n)
+{
+    if ( n <= 1 )
+        return 0;
+    for (int i=2; i*i<=n; i++)
+    {
+        if ( n%i == 0)
+            return 0;
+    }
+    return 1;
+}
+void NhapmangSNT(int a[], int &n)
+{
+    cin >> n;
+    int j=0;
+    for (int i=0; i<99999; i++) // Logic tạo hàm toàn snt
+    {
+        if ( snt(i) == 1 )
+        {
+            a[j++] = i;
+        }
+        if ( j == n)
+            return;
+    }
+}
+
+int divide_array(int n, int y) // Hàm kiểm tra các phần của số n
+{
+    if ( n == 0)
+        return 0;
+    if ( n %10 == y)
+        return 1;
+    return divide_array(n/10, y);
+}
+
+int SoPhanTuChuaY(int a[], int n,int y)
+{
+    int cnt = 0;
+    for (int i=0; i<n; i++)
+    {
+        if ( divide_array(a[i], y) == 1 ) // Kiểm tra phần tử a[i] nếu có thì cho tăng cnt
+            cnt++;
+    }
+    return cnt;
+}
+
+int main()
+{
+	int a[MAX], n, y;
+	cin >>y;
+	NhapmangSNT(a,n);
+	cout << SoPhanTuChuaY(a, n, y) << endl;;
+	return 0;
+}
