@@ -1,0 +1,48 @@
+// Mô tả bài toán: Viết chương trình để mã hóa 1 chuỗi nhập theo qui ước chuyển đổi các ký tự 
+trong bảng mã ASSCII và các ký tự giống ở gần nhau sẽ được gom chung như sau:
+VD1: chuỗi s="aaa" --> "973"
+Giải thích kết quả "973" --> '97' là chuyển đổi của 'a' và '3' là do có 3 ký tự a liền kề nhau.
+VD2: chuỗi s="aabbb" --> "972983"
+Giải thích kết quả "972983" --> gồm "972" và "983" trong đó:
+"972" --> '97' là chuyển đổi của 'a' và '2' là do có 2 ký tự a liền kề nhau
+("972" là mã hóa của "aa")
+"983" --> '98' là chuyển đổi của 'b' và '3' là do có 3 ký tự b liền kề nhau
+("983" là mã hóa của "bbb")
+
+Input abcabc
+Ouput 971981991971981991
+// Code logic: Ở bài toán này bạn cần biết cách chuyển đối từ kí tự thành số, cách này
+mình gị là ép kiểu vdu, để hiển thị giá trị assii của a thì bạn sẽ in ra như sau: (int)a
+, tuy nhiên như thế vẫn chưa đủ, các bạn cũng cần phải có logic tìm được length của các
+kí tự, trong bài này mình sẽ sử dụng logic S[i] và S[i+1], không được quuên xử lí các kí tự cuối 
+cùng, kèm theo đó là giới hạn chuỗi i chạy tới len-1 thui.
+// Code tham khảo
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+#define MAX 1000
+
+void fun(char S[])
+{
+    cin.getline(S, MAX);
+    int n = strlen(S);
+    int s = 0;
+    for (int i=0; i<n-1; i++)
+    {
+        if ( S[i] != S[i+1]) // Kiểm tra khác kí tự vidu: aaab thì s=0 và i = 2
+        {
+            int len = i-s+1; // In ra số kí tự tương ứng (3)
+            cout << (int)S[i] << len;
+            s= i+1;
+        }
+    }
+    int len = n-s;
+    cout << (int)S[n-1] << len;
+}
+
+int main() {
+    char S[MAX];
+    fun(S);
+    return 0;
+}
