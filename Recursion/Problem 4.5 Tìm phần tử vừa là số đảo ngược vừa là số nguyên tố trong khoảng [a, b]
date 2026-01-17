@@ -1,0 +1,71 @@
+// Mô tả bài toán: Nhập hai số a và b bất kì, in ra số các phần tử thuộc khoảng a b sao cho
+các phần tử này vừa là số nguyên tố vừa là số đảo ngược.
+Test case:
+Input 5 150
+Output 16
+
+Input 3668 29246
+Output 518
+// Logic code: bài này khá dễ khi mình chỉ càn duyệt mảng từ i=a đến i =b, à bài này có thể dùng 
+đệ quy để nâng  trình nha, chỉ là thay hàm for bằng 1 hàm riêng dùng để đệ quy, lúc đó mình cần
+dùng 4 biến cho đệ quy chính giả sử recursion_fun(a, b, i, cnt) mình dùng đệ quy đuôi, khởi tạo i
+bằng a rùi dừng khi i =b, in ra cnt, logic thì ình kiểm tra snt(i, 2) và snt( reve(i, 0), 2 ) 
+đây là 1 hàm phức hợp logic khi mình kết hợp cả đệ quy ở snt, logic khá đơn giản mình để dưới nha
+chủ yếu mình ôn lại và tranh thủ chia sẻ tư duy logic với mn.
+// Code tham khảo
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+#define MAX 100
+
+void input(long long &a, long long &b)
+{
+    cin >> a >> b;
+}
+
+int reve(int n, int s)
+{
+    if ( n== 0) return s;
+    return reve(n/10, s*10+n%10);
+}
+int snt(int n, int i) // Logic test số nguyên tố
+{
+    if ( n<= 1) return 0;
+    if ( n%i == 0) return 0;
+    if ( i*i>n ) return 1; // Bình thường dùng for heck cho chạy i*i<=n; thì mình chỉ cần đảo
+    // ngược là ok
+    return snt(n, i+1);
+}
+void fun(long long a, long long b)
+{
+    int cnt = 0;
+    for (int i=a; i<=b; i++)
+    {
+        if ( snt(i, 2) && snt(reve(i, 0), 2) ) // Check điều kiện gộp hai hàm
+        {
+            cnt++;
+        }
+    }
+    cout << cnt;
+}
+
+int main()
+{
+    long long a, b;
+    input(a, b);
+    fun(a, b);
+}
+
+// Code thay thế:
+đây là hàm recursion_fun(a, b, i, cnt) mà mình mới nghĩ ra, các bạn check thử nhé:
+int recursion_fun(long long a, long long b, long long i, int cnt)
+
+{
+        if ( i == b )return cnt;
+        if ( snt(i, 2) && snt( (reve(i, 0)), 2 ))
+            cnt++;
+        return fun(a, b, i+1, cnt);
+}
+// nhớ ở cả hàm main cũng gọi lại cấu trúc y chang và cout << recursion_fun(..) nhé.
+
