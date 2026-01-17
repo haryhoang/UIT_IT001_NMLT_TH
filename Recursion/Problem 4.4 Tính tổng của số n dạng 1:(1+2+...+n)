@@ -1,0 +1,47 @@
+// Mô tả bài toán: Nhập một số n bất kì, tính tổng của một chuỗi theo công thức sau:
+1/1 + 1/(1+2) + 1/(1+2+3) +.... 1/(1+2+3+...+n)
+Test case: 
+Input 7
+Ouput 1.75
+
+Input 3
+Output 1.5
+
+// Logic code: Để xử lí bài toán này mình nghĩ cá bạn cần nhìn ra được ở đây đệ quy được dùng đẻ
+làm gì, mình sẽ nháp sơ qua thì thấy trong bài này có hai chỗ đệ quy ( lặp lại ), thứ nhất là sự 
+lặp lại của 1/.. + 1/... đúng không, thứ 2 là đệ quy chỗ tăng dần, nghĩa là 1, 1+2, 1+2+3,...
+vậy từ đó mình sẽ xây dựng 1 hàm đệ quy chính và 1 hàm đệ quy phụ, trong bài toán này mình thường
+kết hợp cả đệ quy lặp và đệ quy đuôi, mình sẽ dùng logic của đệ quy đuôi cho biến tăng kiểu 1, 
+1+2, 1+2+2,... nha, còn đệ quy lặp thì sẽ thường được dùng để cộng giống nhau, do vậy mình sẽ
+áp dụng đệ quy lặp cho 1/.. +1/.... Lý do thì mình nghĩ các bạn code nhiều sẽ nhận ra được
+đế với logic code tham khảo mình sẽ cố găngs nói ra tư duy của mình nha. Nhớ chạy code tay
+để có thể hiểu được luồng xử lí dữ liệu thì sẽ giúp các bạn giải quyết được mọi bài.
+
+// Code tham khảo
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+#define MAX 100
+
+int sum(int s, int i) // Đây là hàm đệ quy phụ, mục đích để in tổng từ 1 -> n.
+{
+    if ( i == s  )return i;
+    return sum(s, i+1) + i;
+}
+
+float fun(int n, int i) // Đây là hàm đệ quy chính của mình, bằng cách gọi hàm đệ quy đuôi
+// với biến i sẽ giúp mình xác định được điểm dừng của bài toán là i == n.
+{
+    if (i == n) return 1.0/(sum(i, 0));
+    return 1.0/(sum(i, 0)) + fun(n, i+1); // Logic của mình khá đơn giản, chủ yếu mình tác động
+    // 1/ sum của số n, vidu n =5 sẽ có sum =1+2+3+4+5, ngoài ra thì mình còn cho lặp với 
+    // fun (n, i+1) , cố định n chỉ để tăng thêm i, logic dừng ở trên các bạn tự chạy thử code nhe
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    cout << fun(n, 1);
+}
