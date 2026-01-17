@@ -1,0 +1,62 @@
+// Mô tả bài toán: Nhập mảng có n phần tử, sau dó xóa đi các phần tử có giá trị bằng k
+Test case
+Input 8
+2 9 5 6 9 8 9 1
+2
+Ouput 2 5 6 8 1
+
+Input 5
+6 6 6 6 6
+6
+Output 
+// Logic code: Ở bài toán này khá đơn giản, đầu tiên ta cần xác định vị trí cần xóa trước, 
+giả sử mình xác định được là biến i, từ đó, ta có vòng lặp cho chjay từ j = i và thiết lập 
+sao cho a[i] = a[i+1], lặp cho hết vòng lặp, đè các giá trị từng phần tử, sau đó chỉ cần ta cho 
+n-=1; i-=1 để có thể loại bỏ phần tử cuối cùng, sau đó là phần tử i thì loại bỏ, nghĩa là thay vì
+ta tăng i lên 1 đơn vị thì ta giảm xuống để có thẻ kiểm tra lại xem phần tử tiếp theo 
+có thỏa hay khong, đây là cách để có thẻ đảm báo xóa đủ phần tử trong mảng, ngoài ra nếu
+chỉ để in thui thì khá dễ, ta chỉ cần in các phần tử khác k thui,đây là cách mà không tác động 
+đến mảng mà vân giữ nguyên cấu trúc.
+// Code tham khảo
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+#define MAX 100
+
+void input(int a[], int &n)
+{
+    cin >> n;
+    for (int i=0; i<n; i++)
+    {
+        cin >> a[i];
+    }
+}
+
+void output(int a[], int &n)
+{
+    int k;
+    cin >> k;
+    for (int i=0; i<n; i++)
+    {
+        if ( a[i] == k ) // Timd kiếm vị trí cần loại bỏ
+        {
+            for (int j=i; j<n; j++) // Chèn vị trí j+1 lên vị trí hiện tại
+            {
+                a[j] = a[j+1];
+            }
+            n-=1; // Loại bỏ phần tử dư thừa cuối cùng sau khi đè mảng
+            i-=1; // Kiểm tra phần tử tiếp theo có thỏa hay không
+        }
+    }
+    for (int i=0; i<n; i++)
+        cout << a[i] << " ";
+}
+
+int main()
+{
+    int n;
+    int a[MAX];
+    input(a, n);
+    output(a, n);
+}
