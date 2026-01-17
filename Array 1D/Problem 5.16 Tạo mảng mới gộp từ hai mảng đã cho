@@ -1,0 +1,116 @@
+// Mô tả bài toán: Giả sử có 2 mảng a và b đã được sắp xếp theo thứ tự tăng dần.
+Hãy trộn 2 mảng a và b thành mảng c sao cho mảng c vẫn đảm bảo thứ tự tăng dần 
+(không sử dụng thuật toán sắp xếp trên mảng c)
+Test case:
+Input 5
+2 5 6 8 20
+4
+1 7 10 11
+Ouput
+1 2 5 6 7 8 10 11 20
+
+// Logic code: Ở bài này mình có hai phiên bản code, một abnr code sử dụng vòng lặp for, một bản
+code mình dùng vòng lặp ưhưile, mặc dù kĩ thuật xử lí khác nhau nhưng đều chung logic, mình sẽ so 
+sánh các phần tử a[i] và b[j] khá nhiều biến liên quan để có thể kiểm tra từng phần tử
+itrong mảng a và mảng b, sau đó mình sẽ cho nếu a lớn hơn b thì c = b, nếu ko thỏa thì c= a
+tuy nhiên, sẽ có trường hợp 1 mảng hết phần tử để chèn trước nên cần xử lí ở chỗ này, tóm lại thì
+mình sẽ in hết phần trong mảng còn lại gắn vào mảng c.
+// Code tham khảo
+Vòng lặp for
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+#define MAX 100
+
+void input(int a[], int &n)
+{
+        cin >> n;
+    for (int i=0; i<n; i++)
+    {
+        cin >> a[i];
+    }
+
+}
+
+void output(int a[], int b[], int n, int m)
+{
+    int p = m + n;
+    int c[MAX];
+    int ia =0, ib =0, i =0;
+
+    for (i; i<p; i++)
+    {
+        if ( ia==n || ib ==m )
+            break;
+        if ( a[ia] > b[ib] )
+        {
+            c[i] = b[ib++];
+            continue;
+        }
+        c[i] = a[ia++];
+    }
+
+    if ( ia == n )
+    {
+        for (int j=ib; j<m; j++)
+            c[i++] = b[ib++];
+    }
+    if ( ib == m )
+    {
+        for (int j=ia; j<n; j++)
+            c[i++] = a[ia++];
+    }
+    for (int i=0; i<p; i++)
+        cout << c[i] << " ";
+}
+
+int main()
+{
+    int n;
+    int a[MAX];
+    int m;
+    int b[MAX];
+    input(a, n);
+    input(b, m);
+    output(a, b, n, m);
+}
+
+Vòng lặp while
+#include<iostream>
+using namespace std;
+#define MAX 20
+void input(int a[], int b[], int &n1, int &n2){
+    cin >> n1;
+    for (int i=0; i<n1; i++){
+        cin >> a[i];
+    }
+    cin >> n2;
+    for (int i=0; i<n2; i++){
+        cin >> b[i];
+    }
+}
+void output(int a[], int b[], int n1,  int n2){
+    int c[MAX];
+    int k=0; int i=0, j=0;
+    while (i<n1 && j<n2)
+    if (a[i]<b[j]){
+        c[k++]=a[i++];
+    }
+    else{
+        c[k++]= b[j++];
+    }
+    while (i < n1) c[k++] = a[i++];
+    while (j < n2) c[k++] = b[j++];
+    for (int m=0; m<n1+n2; m++){
+        cout << c[m] << " ";
+    }
+}
+
+
+
+int main(){
+   int a[MAX], b[MAX]; int n1, n2;
+   input(a, b, n1, n2);
+   output(a, b, n1, n2);
+}
