@@ -1,0 +1,29 @@
+// Mô tả bài toán: Viết chương trình tính số dư của phép chia m cho n
+Test case:
+Input 990 88
+Ouput 22
+
+Input 5 4
+Ouput 1
+// Logic code: Ở bài toán này thì cũng có template và mình chỉ viết thêm hai dòng vào chương
+trình này, ở bài toán này thì mình sẽ tư duy số dư theo kiểu số bị chia, số chia và số dư, bản chất 
+của phép dư chính là phép trừ liên tục, miễn sao là khi phần phép trừ sau cùng nhỏ hơn số chia thì
+đó chính là phép dư của bài toán, còn nếu phần phép trừ này đúng bằng số chia thì đây chính là 
+một phép chia hết,. các bạn có thể quan sát code và chạy tay thử sẽ hiểu được logic của bài toán 
+nhé.
+// Code tham khảo
+
+#include <iostream>
+using namespace std;
+int modulo(int m, int n){
+    if (m%n<n) return m%n; // Dòng này mình viết để kiểm tra xem à liệu phần trừ của m và n có nhỏ
+    // hơn n không, nếu nhỏ hơn thì đây là phép chia dư, còn nếu nó m-n = n thì đây là phép chia hết 
+    return modulo(m-n, n); // Mình giữ nguyên phần số chia và giảm phần số bị chia đúng bằng 
+    // số chia (bản chất của phép chia )
+}
+
+
+int main (){
+    int m, n; cin >> m >> n;
+	cout << modulo(m, n);
+}
