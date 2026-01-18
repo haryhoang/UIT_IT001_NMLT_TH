@@ -1,0 +1,51 @@
+// Mô tả bài toán: Nhập một số n. Viết hàm tính tổng tất cả các ước chẵn của một số nguyên dương N. 
+Nếu không có ước số chẵn nào thì trả về -1.
+Test case 
+Input 17
+Output -1
+
+Input 8
+Output 14
+
+// Logic code: Trong bài toán này thì mình ngĩ dùng đệ quy đuôi kết hợp đệ quy lặp sẽ khá hiệu quả
+, ban đầu thì do bài toán này có template ở hàm main nên mình chỉ có thể xử lí ở hàm
+sum_even_divisor và hàm uoc_so_nguyen_to, mình dùng hàm sum_even_divisor để gọi hàm kia
+( mục đích để lách luật chút), tư duy chính của mình ở hàm uoc_so_nguyen_to, trong ham này
+mình xác định được điều kiện dừng khi i==n nhưng vẫn phải kiểm tra xem liệu n có chia hết cho i không
+nếu có chia hết thì mình cộng trực tiếp i, còn không thì mình cộng với 0, logic chính xử lí ở điều
+kiện if , nếu chia hết thì mình cho i + với hàm đệ quy gọi tiếp theo với i+2, còn không thì chỉ cộng
+với hàm uoc_so_nguyen_to không thui, bài này khá hay và luyện đệ quy ok nha.
+// Code tham khảo
+
+#include <iostream>
+using namespace std;
+
+int Input()
+{
+    int n;
+    cin >> n;
+    return n;
+}
+
+int uoc_so_nguyen_to(int n, int i)
+{
+    if ( i == n ) // Điều kiện dừng nhưng vẫn phải kiểm tra xem có ok ko
+        {if ( n%i == 0) return i; // nếu vẫn là ước, cộng với i, ko là ước thì cộng với 0
+    return 0;}
+    if ( n%i == 0 ) return i + uoc_so_nguyen_to(n, i+2);
+    return uoc_so_nguyen_to(n, i+2);
+}
+
+int sum_even_divisor(int n)
+{
+    if ( uoc_so_nguyen_to(n, 2) != 0 ) // Nhưng nhớ ở đây phải check xem liệu sum có khác 0 ko đã nha
+        return uoc_so_nguyen_to(n, 2); // Gọi hàm kia
+    return -1;
+
+}
+
+int main() {
+	int n;
+	n=Input();
+	cout << sum_even_divisor(n);
+}
