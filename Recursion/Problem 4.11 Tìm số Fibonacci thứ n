@@ -1,0 +1,63 @@
+// Mô tả bài toán: Bài toán yêu cầu nhập một số n và trả ra giá trị của số fibonacci thứ n
+Test case:
+Input 6
+Ouput 8
+
+Input -6
+Output So -6 khong nam trong khaong [1,30]
+
+// Logic code: Thật ra bài toán này có template nên việc nhận áp dụng logic tìm fibo khá giới 
+hạn chỉ co công thức duy nhất đối với dạng hàm Fibo(x)
+// Code tham khảo:
+
+#include <iostream>
+using namespace std;
+#define MAX 300
+
+int Fibo(int);
+
+int main()
+{
+	int x;
+	cin >> x;
+    if ( x < 1 || x > 30)
+    {
+       cout << "So " << x << " khong nam trong khoang [1,30].";
+       return 0;
+    }
+    cout << Fibo(x);
+}
+
+int Fibo (int x)
+{
+    if ( x == 0) return 0;
+    if ( x <= 2 )return 1;
+    return Fibo(x-1) + Fibo(x-2);
+}
+// Logic thứ hai mình muốn làm là sử dụng fibonacci với đệ quy đuôi, trong bài toán này mình dùng
+đêh quy bằng cách truyền thêm hai biến là t và s đại diện cho giá trị trước và sau, logic toán học
+của mình  áp dụng theo kiểu bản Fibo, số sau bằng cộng hai số trước, do vậy thì ở trường hợp
+đệ quy đuôi mình return Fibo (x-1, t+s, t);
+
+#include <iostream>
+using namespace std;
+#define MAX 300
+
+int Fibo (int x, int t, int s)
+{
+    if ( x == 0 ) return s;
+    return Fibo(x-1, t+s, t); // Cộng dồn các giá trị của số sau bằng t+s và t.
+}
+
+int main()
+{
+	int x;
+	cin >> x;
+    if ( x < 1 || x > 30)
+    {
+       cout << "So " << x << " khong nam trong khoang [1,30].";
+       return 0;
+    }
+    cout << Fibo(x, 1, 0); // Logic truyền vào hàm Fibo như sau, biến t =1 và biến s =0
+}
+
