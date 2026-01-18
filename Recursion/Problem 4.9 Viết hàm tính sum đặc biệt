@@ -1,0 +1,34 @@
+// Mô tả bài toán: Nhập n, tính tổng S đặc biệt sau:
+S = sqrt ( n, sqrt ( n-1 + .... ) )
+Hiểu đơn giản nha, vidu Nhâp 2 thì mình sẽ có căn ( 2 + căn 1 )
+Với n=3 thì ta có căn ( 3 + căn ( 2 cộng căn 1 ) ) ) nha
+Test case
+Input 2
+Output 1.73
+
+Input 3
+Ouput 2.18
+// Logic code, các bài đệ quy thì mình nghĩ cách giải quyết dễ hiểu nhất là các bạn phải nhìn ra 
+đươc nó lặp lại ở chỗ nào, như mình sẽ nhìn thấy được rằng, ta có lặp ở chỗ căn của cái này cộng căn 
+của cái đó nhưng trừ 1 lại cộng cho căn của cái đó trừ hai đến khi cái đó trừ cho n-1
+sao cho (n - (n-1) ) =1 thì dừng, như vậy mình nghĩ ngay ra được đệ quy ở chỗ số đó cộg cho căn 
+số đó trừ 1, các bạn có thể xem code tham khảo dể dễ nhìn hơn nhé
+// Code tham khảo
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+float calculate(int n)
+{
+    if (n == 1) return 1; // dừng khi nó trừ cho n-1 để bằng 1
+    return sqrt(n + calculate(n-1)); // Đệ quy bằng chính nó cộng căn nó -1
+}
+
+int main() {
+	int n;
+	cin >> n;
+    cout <<fixed<< setprecision(2)<< calculate(n); // Đây là template của bài toán này và chúng 
+    // ta cout với fixed bằng hai con số nhé 
+    return 0;
+}
