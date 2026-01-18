@@ -1,0 +1,25 @@
+// Mô tả bài toán: Cho hai số m và n, sủ dụng để quy để tìm ước chung nhỏ nhất của hai số
+Test case: 17 51
+Ouput 17
+
+Input 16 284
+Output 4
+// Logic code: Ở bài này mình sẽ không nói sâu về qui tắc tìm, chủ yếu là khai triển toán học 
+để có thể hiểu được logic code này nha, do cde này cũng ngắn nên lâu lâu mình đụng cái là nhớ à
+// Code tham khảo
+
+#include <iostream>
+using namespace std;
+
+int gcd(int m, int n)
+{
+    if ( n==0) return m;
+    return gcd(n, m%n);
+}
+
+int main() {
+	int m, n;
+	cin >> m >> n;
+	cout << gcd(m, n);
+	return 0;
+}
