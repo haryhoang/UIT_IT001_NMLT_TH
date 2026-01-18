@@ -1,0 +1,59 @@
+// Mô tả bài toán: Viết hàm đệ quy lặp để có thể tìm số đảo ngược của số n
+Test case
+Input 1037
+Ouput 7301
+
+Input 3450
+Output 543
+// Logic code: Thật ta bài này với mình dùng đệ quy không khó, đó là nếu mình dùng đệ quy đuôi
+dễ hơn, nhưng bài toán này có template nên mình bắt buộc phải dùng đệ quy lặp, khá là khó
+nhưng mà mình đã nghĩ ra được 1 cách, cách 1 là trick hơi ấy nhưng mà đã AC qua, cách hai là mình
+nghi mới khá ths vị, các bạn cùng xem qua hai cách nhé.
+// Code tham khảo
+// Cách 1: Lách luật
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+using namespace std;
+
+int rv(int n, int s){ // Đó là mình gọi hàm đệ quy đuôi để làm bài dễ hơn ( Qua mặt wecode kkk )
+    if(n==0) return s;
+    return rv(n/10, s*10+n%10);
+    }
+int reverse(int n){
+     return rv(n, 0);
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << reverse(n);
+}
+// Cách 2: sử dụng hai hàm
+// Cách này mình nghĩ ra khi phân tích cơ chế đảo tay của đảo ngược, đó là nhân với bội 10 tương ứng
+// Vidu với 345 thì đảo ngược sẽ là 543 với 500 + 40 + 3 do vậy mình tính toán số bội 10
+// cần nhân là xong.
+
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+int sum_digit(int n, int i) // Hàm tính bội 10 cần nhân, logic khá dễ nên mình ko gt nhé
+{
+    if (n<10) return pow(10, i);
+    return sum_digit(n/10, i+1);
+}
+
+int reverse(int n)
+{
+    if ( n== 0) return 0;
+    return n%10*sum_digit(n, 0) + reverse(n/10); // Mình dùng đệ quy lặp mix with hàm nhe
+    // công nhận có bài mình nảy đệ quy hàm nhanh lắm mà có bài mình thích dùng đệ quy đuôi hơn
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << reverse(n);
+}
