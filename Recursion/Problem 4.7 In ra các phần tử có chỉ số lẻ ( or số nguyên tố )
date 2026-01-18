@@ -1,0 +1,40 @@
+// Mô tả bài toán: Sử dụng đệ quy để in ra cac phần tử có vị trí là số lẻ ( snt là dạng nâng cấp )
+Test case
+Input 8
+1 2 3 4 5 6 7 8
+Ouput 2 4 6 8
+
+// Logic code: mình sử dụng đệ quy đuôi với chỉ mục là i, điều kiện dừng là i == n. thiết lập đệ quy
+thay cho vòng lặp for
+Note: Ở phần code nâng cấp thì chúng ta chỉ cần thêm 1 hàm snt để kiểm tra index i có phải snt hay
+không, nếu là số nguyên tố thì in
+// Code tham khảo
+#include<iostream>
+using namespace std;
+#define MAX 100
+
+void input(int a[], int n, int i){
+    if ( i == n) return;
+    cin >> a[i];
+    return input(a, n, i+1);
+
+}
+
+void output(int a[], int n, int i)
+{
+    if ( i == n ) return ;
+    if ( i%2 == 1) cout << a[i] << " ";
+    return output(a, n, i+1);
+}
+
+int main(){
+    int n;
+    int a[MAX];
+    cin >> n;
+    input(a, n, 0);
+    output(a, n, 0);
+}
+
+// Ở dạng bài nâng cấp chỗ if ta xử lí như sau: 
+// if ( snt (i, 2 ) == 1 ) cout << a[i] << " " ;
+// và viết thêm hàm int snt(int n, int i) là được .
