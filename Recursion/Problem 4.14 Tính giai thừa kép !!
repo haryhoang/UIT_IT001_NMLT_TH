@@ -1,0 +1,35 @@
+// Mô tả bài toán: Nhập một số n và tính giai thừa kép dựa vào tính chất của n
+Nếu n chẵn thì giai thừa kép có công thức: 2.4.6.8. ... n
+Nếu n lẻ thì giai thừa kép có công thức: 1.3.5. ... n
+Test case:
+Input 8
+Output 384
+
+Input 9
+Ouput 945
+// Logic code, bài này khong quá khó nhưng vấn đề ở đây là test case, nếu các bạn ít kinh nhgiệm 
+sẽ không thể nào fix ở ngày lần đầu được, tiện thể thì minh cũng chia sẽ đoạn code này mình nghĩ khá
+ngắn rui, quay trở lại test case thì các bạn lưu ý với các bài toán này thì test case chặn thường 
+là số rất lớn ,kiểu int sẽ không kham nổi nên mình đã nhận ra ngay lập tức và chuyển sang long long
+thì test case đúng.
+// Code tham khảo
+
+#include <iostream>
+using namespace std;
+#define MAX 300
+
+long long fun(long long n, long long i) // Logic chuyển từ dùng int sang long long
+{
+    if (i == n) return n;
+    return i * fun(n, i+2);
+}
+
+int main()
+{
+	long long n;
+	cin >> n;
+	if ( n%2==0 ) // Phân chia hàm lẻ và sử dụng đệ quy đuôi để đỡ phải gọi hai hàm
+	cout << fun(n, 2);
+	else
+        cout << fun(n, 1);
+}
