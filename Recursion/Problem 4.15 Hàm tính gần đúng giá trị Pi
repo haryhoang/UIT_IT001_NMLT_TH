@@ -1,0 +1,30 @@
+// Mô tả bài toán: Số pi (ký hiệu: π) là một hằng số toán học có giá trị bằng tỷ số giữa chu vi
+của một đường tròn với đường kính của đường tròn đó. Hằng số này có giá trị xấp xỉ 
+bằng 3,1415926535897. Nó được biểu diễn bằng chữ cái Hy Lạp π từ giữa thế kỷ XVIII.
+Test case:
+Input 2
+Ouput 3.46667
+
+Input 30
+Output 3.17384
+// Logic code: Bài này mình dùng đệ quy lặp + đuôi và hàm pow từ thư viện cmath, nhớ chú ý 
+chúng ta dùng hàm fun để tính toán nhé
+// Code tham khảo
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+#define MAX 300
+
+float fun(int n, int i)
+{
+    if (i == n) return pow(-1, i)/(2*n+1) ;
+    return pow(-1, i)/(2*i+1) + fun(n, i+1); // Phân tích từng bước sẽ thấy được bước đệ quy
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    cout << 4*fun(n, 0);
+}
