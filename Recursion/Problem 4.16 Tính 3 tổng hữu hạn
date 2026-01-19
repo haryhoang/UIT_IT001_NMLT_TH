@@ -1,0 +1,46 @@
+// Mô tả bài toán: Cho 1 số n, lần lượt tính ba tổng đặc biệt
+// Code tham khảo:
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+void input(int &n)
+{
+    cin >> n;
+}
+double giai_thua(int n)
+{
+    if ( n == 1) return 1;
+    return n*giai_thua(n-1);
+}
+
+double ham_mu_cua_n(int n, int i)
+{
+    if ( i==n ) return pow(i, i);
+    return pow(i, i) + ham_mu_cua_n(n, i+1);
+}
+double giai_thua_lon(int n, int i)
+{
+    if ( i == n) giai_thua(n);
+    return giai_thua(i) + giai_thua_lon(n, i+1);
+}
+double chuoi_dac_biet(int n, int i)
+{
+    if ( i == n ) return 1/(giai_thua(n));
+    return 1/(giai_thua(i)) + chuoi_dac_biet(n, i+1);
+}
+
+void output(int n)
+{
+    cout << ham_mu_cua_n(n, 1) << endl;
+    cout << giai_thua_lon(n, 1) << endl;
+    cout << chuoi_dac_biet(n, 1);
+}
+
+int main ()
+{
+    int n;
+    input(n);
+    output(n);
+}
