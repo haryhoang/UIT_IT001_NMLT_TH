@@ -1,32 +1,42 @@
-# UIT_IT001_NMLT_TH
+# IT001 - Introduction to Programming (C++)
 
-Chào mừng bạn đến với kho lưu trữ bài tập thực hành môn **Nhập môn Lập trình (IT001)** của tớ, tớ tên là Gia Hùng, sinh viên năm nhất ngành Kỹ thuật máy tính, DHCNTT UIT. Đây là nơi mình lưu trữ và chia sẻ lời giải và kinh nghiệm test case cho các bài toán trong học phần IT001 kì 1 năm 1.
+![Language](https://img.shields.io/badge/Language-C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![University](https://img.shields.io/badge/University-UIT%20(VNUHCM)-003B5C?style=for-the-badge&logo=school&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+
+> **"Algorithms are the heart of Computer Science."**
+
+##  Introduction
+Welcome to my repository for **IT001 - Introduction to Programming*! 
+I am **Harry Hoan)**, a UIter in **Computer Engineering** at the **University of Information Technology (UIT)**.
+
+This repository documents my solutions to practical lab exercises, focusing on building a strong foundation in **C++ syntax, algorithmic logic, and problem-solving techniques**.
+
+##  Repository Structure
+
+The exercises are organized by topics, covering essential programming concepts:
+
+| Folder | Topic | Key Concepts & Learnings |
+| :--- | :--- | :--- |
+| **`Array 1D/`** | 🔢 **One-Dimensional Arrays** | Basic array manipulation, Linear Search, Sorting algorithms (Interchange Sort), reversing arrays. |
+| **`Array 2D/`** | 🧊 **Two-Dimensional Arrays** | **Matrix operations** (Addition, Multiplication), finding Saddle Points, traversing rows/columns. 
+| **`String/`** | 🔡 **String Processing** | ASCII manipulation, string comparison, normalization, finding substrings. |
+| **`Recursion/`** | 🔄 **Recursion (Đệ quy)** | Understanding base cases & recursive steps. Solving problems like Fibonacci, Factorials, and Summation. |
+| **`Struct/`** | 📦 **Structs (Data Types)** |  Creating custom data types for complex object management. |
+
+##  Coding Standards
+
+To ensure code quality and readability, I follow these principles:
+*   **Meaningful Naming:** Variables and functions are named in English (e.g., `findMax`, `sortArray`).
+*   **Comments:** Key logic steps are explained via comments (Vietnamese to easily understand)
+*   **Modularity:** Breaking down complex problems into smaller functions.
+
+##  Goals
+
+This repository is not just for homework; it serves as my preparation for:
+*   **Data Structures & Algorithms (DSA)** in the next semester.
+*   **Embedded Programming** (Optimizing C++ for Hardware).
+*   **Academic Competitions** (Olympic Informatics).
 
 ---
-
-## Giới thiệu
-Trang này được lập ra nhằm mục đích:
-- Lưu trữ các bài giải thực hành (Lab) hàng tuần.
-- Chia sẻ cách tiếp cận và giải thuật cho các bạn cùng khóa tham khảo.
-
----
-
-##  Cấu trúc kho lưu trữ
-Các bài tập được sắp xếp theo từng vấn đề (Problem) hoặc từng buổi thực hành để dễ dàng tìm kiếm:
-- Một số chủ đề sẽ được phân loại theo bài học, ví dụ: String, Pointer, Array 1D, 2D, ...
-  
----
-
-##  Ngôn ngữ và Công cụ
-- **Ngôn ngữ:** C/C++
-- **Môi trường:** Codeblock (Làm quen cho việc kiểm tra cuối kì, thực hành,.. )
-
----
-
-## 🤝 Đóng góp và Liên hệ
-Nếu bạn tìm thấy lỗi trong mã nguồn hoặc có cách giải hay hơn, đừng ngần ngại:
-1. **Fork** dự án này.
-2. Tạo một **Pull Request**.
-3. Và nhớ để lại một **Star ⭐** nếu bạn thấy kho lưu trữ này hữu ích!
-
-*Chúc các bạn học tốt môn Nhập môn Lập trình!*
+*Created by **Harry Hoang**
