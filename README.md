@@ -8,7 +8,7 @@
 
 ##  Introduction
 Welcome to my repository for **IT001 - Introduction to Programming*! 
-I am **Harry Hoan)**, a UIter in **Computer Engineering** at the **University of Information Technology (UIT)**.
+I am **Harry Hoang)**, UIter in **Computer Engineering** at the **University of Information Technology (UIT)**.
 
 This repository documents my solutions to practical lab exercises, focusing on building a strong foundation in **C++ syntax, algorithmic logic, and problem-solving techniques**.
 
@@ -37,6 +37,5 @@ This repository is not just for homework; it serves as my preparation for:
 *   **Data Structures & Algorithms (DSA)** in the next semester.
 *   **Embedded Programming** (Optimizing C++ for Hardware).
 *   **Academic Competitions** (Olympic Informatics).
-
 ---
-*Created by **Harry Hoang**
+*Created by **Harry Hoang** *
